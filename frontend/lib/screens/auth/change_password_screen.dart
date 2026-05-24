@@ -27,7 +27,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       });
       await ApiService.refresh();
       if (!mounted) return;
-      context.go('/');
+      context.go('/sftp');
     } catch (e) {
       setState(() => _error = e.toString());
     } finally {

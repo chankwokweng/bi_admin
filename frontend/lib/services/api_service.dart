@@ -42,7 +42,14 @@ class ApiService {
     _token = prefs.getString('token');
     _role = prefs.getString('role');
     _mustChangePassword = prefs.getBool('must_change_password') ?? false;
-    if (_token != null) _startRefreshTimer();
+    if (_token != null) {
+      _lastActivity = DateTime.now();
+      try {
+        await refresh();
+      } catch (_) {
+        await logout();
+      }
+    }
   }
 
   static void _startRefreshTimer() {

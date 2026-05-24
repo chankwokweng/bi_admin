@@ -39,7 +39,7 @@ async def login(body: LoginRequest):
     if not row["is_approved"]:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Account not approved")
 
-    token = create_access_token({"sub": row["id"], "role": row["role"]})
+    token = create_access_token({"sub": str(row["id"]), "role": row["role"]})
     return TokenResponse(
         access_token=token,
         must_change_password=row["must_change_password"],
@@ -50,7 +50,7 @@ async def login(body: LoginRequest):
 @router.post("/refresh", response_model=TokenResponse)
 async def refresh(user: dict = Depends(get_current_user)):
     """Extend session by issuing a fresh token. Called by frontend on user activity."""
-    token = create_access_token({"sub": user["id"], "role": user["role"]})
+    token = create_access_token({"sub": str(user["id"]), "role": user["role"]})
     return TokenResponse(
         access_token=token,
         must_change_password=user["must_change_password"],

@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Backend (FastAPI)",
+      "type": "debugpy",
+      "request": "launch",
+      "python": "${workspaceFolder}/backend/.venv/Scripts/python.exe",
+      "module": "uvicorn",
+      "args": ["app.main:app", "--port", "8000"],
+      "cwd": "${workspaceFolder}/backend",
+      "envFile": "${workspaceFolder}/backend/.env",
+      "jinja": true,
+      "justMyCode": false
+    },
+    {
+      "name": "Frontend (Chrome)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "chrome",
+      "program": "frontend/lib/main.dart",
+      "args": [
+        "--web-port", "5000",
+        "--dart-define", "API_BASE_URL=http://localhost:8000"
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack",
+      "configurations": ["Backend (FastAPI)", "Frontend (Chrome)"]
+    }
+  ]
+}

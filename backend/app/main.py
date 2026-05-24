@@ -18,6 +18,7 @@ app = FastAPI(title="BI Admin API", version="1.0.0", lifespan=lifespan)
 
 s = get_settings()
 origins = [o.strip() for o in s.cors_origins.split(",")]
+print(f"[CORS] Allowed origins: {origins}")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

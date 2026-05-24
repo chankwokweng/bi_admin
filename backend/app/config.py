@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     sftp_output_dir: str = "/output"
 
     # App
-    cors_origins: str = "http://localhost"
+    cors_origins: str = "http://localhost,http://localhost:5000,http://localhost:80"
 
     class Config:
         env_file = ".env"

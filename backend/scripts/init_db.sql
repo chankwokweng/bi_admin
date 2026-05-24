@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS admin_users (
 -- bcrypt hash of "Admin@1234"
 INSERT INTO admin_users (email, password_hash, role, is_approved, must_change_password)
 VALUES (
-    'admin@example.com',
-    '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/RK.PagodG',
+    'admin@tyto-solutions.com',
+    '$2b$12$F2XGTCnpUH/TEyKUTzmwzepbvgPdeEE.va8kZnjFqlgsITIXrSzKC',
     'super_admin',
     TRUE,
     TRUE

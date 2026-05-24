@@ -18,7 +18,7 @@ async def get_current_user(
     pool = get_pool()
     row = await pool.fetchrow(
         "SELECT id, email, role, is_approved, must_change_password FROM admin_users WHERE id = $1",
-        payload["sub"],
+        int(payload["sub"]),
     )
     if not row:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
