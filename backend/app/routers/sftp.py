@@ -2,17 +2,16 @@ import io
 import os
 import stat
 import zipfile
-from contextlib import contextmanager
 from datetime import datetime
 from typing import Literal
 
-import paramiko
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Query
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from app.config import get_settings
 from app.dependencies import require_approved
+from app.sftp_client import sftp_connection as _sftp_connection
 
 router = APIRouter(prefix="/sftp", tags=["sftp"])
 
@@ -22,18 +21,6 @@ _DIRS = {
     "logs": {"write": False, "delete": True},
     "output": {"write": False, "delete": True},
 }
-
-
-@contextmanager
-def _sftp_connection():
-    s = get_settings()
-    transport = paramiko.Transport((s.sftp_host, s.sftp_port))
-    try:
-        transport.connect(username=s.sftp_user, password=s.sftp_password)
-        sftp = paramiko.SFTPClient.from_transport(transport)
-        yield sftp
-    finally:
-        transport.close()
 
 
 def _resolve_path(root: str, subpath: str) -> str:

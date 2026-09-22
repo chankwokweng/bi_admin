@@ -8,6 +8,7 @@ import 'screens/cutoff/cutoff_screen.dart';
 import 'screens/products/products_screen.dart';
 import 'screens/bom/bom_screen.dart';
 import 'screens/admin/users_screen.dart';
+import 'screens/logs/logs_screen.dart';
 import 'widgets/app_shell.dart';
 
 void main() async {
@@ -38,6 +39,7 @@ final _router = GoRouter(
         GoRoute(path: '/cutoff', builder: (_, _) => const CutoffScreen()),
         GoRoute(path: '/products', builder: (_, _) => const ProductsScreen()),
         GoRoute(path: '/bom', builder: (_, _) => const BomScreen()),
+        GoRoute(path: '/logs', builder: (_, _) => const LogsScreen()),
         GoRoute(path: '/admin/users', builder: (_, _) => const UsersScreen()),
       ],
     ),

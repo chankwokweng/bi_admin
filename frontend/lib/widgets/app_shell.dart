@@ -44,6 +44,7 @@ class _Sidebar extends StatelessWidget {
                 _NavItem(icon: Icons.calendar_today, label: 'Cutoff Periods', path: '/cutoff', current: currentPath),
                 _NavItem(icon: Icons.inventory_2, label: 'Products', path: '/products', current: currentPath),
                 _NavItem(icon: Icons.account_tree, label: 'BOM', path: '/bom', current: currentPath),
+                _NavItem(icon: Icons.receipt_long, label: 'Logs', path: '/logs', current: currentPath),
                 if (ApiService.isSuperAdmin)
                   _NavItem(icon: Icons.manage_accounts, label: 'Users', path: '/admin/users', current: currentPath),
               ],

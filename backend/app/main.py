@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
 from app.database import create_pool, close_pool
-from app.routers import auth, users, sftp, cutoff, products, bom
+from app.routers import auth, users, sftp, cutoff, products, bom, logs
 
 
 @asynccontextmanager
@@ -33,6 +33,7 @@ app.include_router(sftp.router)
 app.include_router(cutoff.router)
 app.include_router(products.router)
 app.include_router(bom.router)
+app.include_router(logs.router)
 
 
 @app.get("/health")
