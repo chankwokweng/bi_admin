@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     env_file: .env
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT:-8000}:8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
@@ -15,10 +15,14 @@ services:
     build:
       context: ./frontend
       args:
-        # Points Flutter web at the backend; adjust if behind a reverse proxy
-        API_BASE_URL: http://localhost:8000
+        # Baked into the compiled JS at build time (Flutter web has no
+        # runtime config) - must match wherever the browser will actually
+        # reach the backend, e.g. http://localhost:${BACKEND_PORT} if you
+        # override that above. Also update CORS_ORIGINS in .env to match
+        # FRONTEND_PORT below, or the browser's API calls will be rejected.
+        API_BASE_URL: ${API_BASE_URL:-http://localhost:8000}
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "${FRONTEND_PORT:-80}:80"
     depends_on:
       - backend
